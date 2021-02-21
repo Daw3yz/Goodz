@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "399989428411",
+    "project_id": "goodz-914bf",
+    "storage_bucket": "goodz-914bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399989428411:android:b1f37f0a94e05fc2a7d99e",
+        "android_client_info": {
+          "package_name": "com.example.goodz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399989428411-7886ptehn4i9cg215h85md3vbr64a4ih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLEi8UDN7LzHbLPC4Z11sHB2ewPamMmPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399989428411-7886ptehn4i9cg215h85md3vbr64a4ih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
