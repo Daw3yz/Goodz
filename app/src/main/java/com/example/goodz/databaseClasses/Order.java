@@ -8,6 +8,7 @@ public class Order {
     public String deliveryDate;
     public String pickupTime;
     public String merchantUserID;
+    public String driverUserID = "";
 
     public Order(){
 
@@ -22,4 +23,5 @@ public class Order {
         this.pickupTime = pickupTime;
         this.merchantUserID = merchantUserID;
     }
+
 }

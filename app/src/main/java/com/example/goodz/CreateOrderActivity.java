@@ -41,8 +41,8 @@ public class CreateOrderActivity extends AppCompatActivity {
         String customerPhoneNo = customerPhoneNoEditText.getText().toString();
         String customerAddress = customerAddressEditText.getText().toString();
         String customerPostalCode = customerPostalCodeEditText.getText().toString();
-        String deliveryData = deliveryDateEditText.toString();
-        String deliveryTime = deliveryTimeEditText.toString();
+        String deliveryData = deliveryDateEditText.getText().toString();
+        String deliveryTime = deliveryTimeEditText.getText().toString();
 
 
         writeNewOrder(customerName, customerPhoneNo, customerAddress, customerPostalCode, deliveryData, deliveryTime, userID);

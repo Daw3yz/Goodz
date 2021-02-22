@@ -2,7 +2,6 @@ package com.example.goodz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.goodz.databaseClasses.Order;
-import com.example.goodz.databaseClasses.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +32,8 @@ public class MerchantActivity extends AppCompatActivity {
         String userID = getIntent().getStringExtra("userID");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merchant);
-        ArrayList<String> ordersList = new ArrayList<String>();
+        ArrayList<Order> ordersList = new ArrayList<Order>();
+        ArrayList<String> ordersKeyList = new ArrayList<String>();
         ordersListView  = (ListView) findViewById(R.id.ordersListMerchant);
 
         Query orders = ref.child("orders").orderByChild("merchantUserID").equalTo(userID);
@@ -44,14 +43,17 @@ public class MerchantActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                         Order order = childSnapshot.getValue(Order.class);
-                        ordersList.add(childSnapshot.getKey());
+                        ordersList.add(order);
+                        ordersKeyList.add(childSnapshot.getKey());
                     }
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                OrderAdapter orderAdapter = new OrderAdapter(MerchantActivity.this, ordersList, ordersKeyList);
+                /**ArrayAdapter<String> adapter = new ArrayAdapter<>(
                         MerchantActivity.this,
                         android.R.layout.simple_list_item_1,
-                        ordersList);
-                ordersListView.setAdapter(adapter);
+                        ordersList);*/
+
+                ordersListView.setAdapter(orderAdapter);
             }
 
             public void onCancelled(DatabaseError databaseError) {
@@ -62,9 +64,7 @@ public class MerchantActivity extends AppCompatActivity {
 
         ordersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object o = ordersListView.getItemAtPosition(position);
-                String str = (String)o; //As you are using Default String Adapter
-                Toast.makeText(getBaseContext(),str,Toast.LENGTH_SHORT).show();
+                Order order =(Order) parent.getItemAtPosition(position);
             }
         });
     }

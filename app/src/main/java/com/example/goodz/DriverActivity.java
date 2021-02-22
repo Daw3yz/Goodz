@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,34 +33,35 @@ public class DriverActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
+        ListView ordersListView = (ListView) findViewById(R.id.ordersListDriver);
 
-        try {
-            ListView ordersListView = (ListView) findViewById(R.id.ordersListDriver);
-            ArrayList<String> ordersList = new ArrayList<String>();
-            Query orders = ref.child("orders").orderByKey();
-            orders.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                            Order order = childSnapshot.getValue(Order.class);
-                            ordersList.add(childSnapshot.getKey());
-                        }
+        ArrayList<Order> ordersList = new ArrayList<Order>();
+        ArrayList<String> ordersKeyList = new ArrayList<String>();
+        Query orders = ref.child("orders").orderByKey();
+        orders.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                        Order order = childSnapshot.getValue(Order.class);
+                        ordersList.add(order);
+                        ordersKeyList.add(childSnapshot.getKey());
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                            DriverActivity.this,
-                            android.R.layout.simple_list_item_1,
-                            ordersList);
-                    ordersListView.setAdapter(adapter);
                 }
+                OrderAdapter orderAdapter = new OrderAdapter(DriverActivity.this, ordersList, ordersKeyList);
+                ordersListView.setAdapter(orderAdapter);
+            }
 
-                public void onCancelled(DatabaseError databaseError) {
-                    ;
-                }
-            });
-        }catch (Exception e){
-            Toast.makeText(DriverActivity.this, e.getMessage(),
-                    Toast.LENGTH_LONG).show();
-        }
+            public void onCancelled(DatabaseError databaseError) {
+                ;
+            }
+        });
+
+        Button acceptButton = (Button) findViewById(R.id.acceptOrder);
+        acceptButton.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Order order =(Order) parent.getItemAtPosition(position);
+            }
+        });
     }
 }
