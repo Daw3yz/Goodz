@@ -7,17 +7,19 @@ public class Order {
     public String postalCode;
     public String deliveryDate;
     public String pickupTime;
+    public String merchantUserID;
 
     public Order(){
 
     }
 
-    public Order(String customerName, String customerPhoneNo, String address, String postalCode, String deliveryDate, String pickupTime){
+    public Order(String customerName, String customerPhoneNo, String address, String postalCode, String deliveryDate, String pickupTime, String merchantUserID){
         this.customerName = customerName;
         this.customerPhoneNo = customerPhoneNo;
         this.address = address;
         this.postalCode = postalCode;
         this.deliveryDate = deliveryDate;
         this.pickupTime = pickupTime;
+        this.merchantUserID = merchantUserID;
     }
 }
