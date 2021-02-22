@@ -4,6 +4,7 @@ public class Driver {
     public String age;
     public String gender;
     public String userID;
+    public int numberOfCrashes = 0;
 
     public Driver() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
