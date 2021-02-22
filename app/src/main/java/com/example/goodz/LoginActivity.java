@@ -29,8 +29,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_YES);
         super.onCreate(savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_login);
@@ -50,8 +48,6 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> signUpTask) {
                             if (signUpTask.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Signup success, signing in",
-                                        Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                                 intent.putExtra("email", email);
                                 LoginActivity.this.startActivity(intent);

@@ -56,12 +56,5 @@ public class DriverActivity extends AppCompatActivity {
                 ;
             }
         });
-
-        Button acceptButton = (Button) findViewById(R.id.acceptOrder);
-        acceptButton.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Order order =(Order) parent.getItemAtPosition(position);
-            }
-        });
     }
 }

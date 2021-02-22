@@ -30,7 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         email = getIntent().getStringExtra("email");
         super.onCreate(savedInstanceState);
-        Toast.makeText(RegisterActivity.this, email, Toast.LENGTH_SHORT).show();
 
         //Check if user has chosen a role
         Query userData = ref.child("users").orderByChild("email").equalTo(email);
